@@ -1,0 +1,17 @@
+cat <<EOF > covid_analysis_commands.txt
+# Inspect Data Files
+cat recovered_data.csv
+cat confirmed_data.csv
+cat deaths_data.csv
+
+# Install Necessary Tools
+sudo apt-get update
+sudo apt-get install -y python3 pandas numpy
+
+# Data Preprocessing
+sed 's/,/\t/g' recovered_data.csv > recovered_data.tsv
+sed 's/,/\t/g' confirmed_data.csv > confirmed_data.tsv
+sed 's/,/\t/g' deaths_data.csv > deaths_data.tsv
+paste recovered_data.tsv confirmed_data.tsv deaths_data.tsv > combined_data.tsv
+
+
